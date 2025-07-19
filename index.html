@@ -3,36 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicolas - Digital Craftsman: Design, Code & SEO</title>
+    <title>Nicolas - Desenvolvedor Web & Especialista em Soluções Digitais</title>
     
     <!-- Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Prism.js for Python Syntax Highlighting -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 
     <style>
         :root {
-            --primary-color: #00bfff;  /* DeepSkyBlue - Mais vibrante */
-            --secondary-color: #00a8cc; /* Ciano mais escuro */
-            
-            --bg-dark-primary: #0a192f;  /* Azul Marinho Noturno */
-            --bg-dark-secondary: #112240; /* Azul um pouco mais claro */
+            --primary-color: #00bfff;  /* DeepSkyBlue */
+            --secondary-color: #00a8cc; 
+            --bg-dark-primary: #0a192f;
+            --bg-dark-secondary: #112240;
             --card-bg: #112240;         
-            
             --text-light: #ccd6f6;      
             --text-secondary: #8892b0;    
             --text-heading: #e6f1ff;     
-
             --font-body: 'Poppins', sans-serif;
             --font-code: 'Fira Code', monospace;
-            
             --shadow-glow: 0 0 20px rgba(0, 191, 255, 0.25);
             --shadow-strong: 0 10px 30px -15px rgba(2,12,27,0.7);
-            
             --border-radius: 8px;
             --transition-speed: 0.3s ease-in-out;
+            --nav-height: 70px;
         }
 
         /* --- Global & Base Styles --- */
@@ -43,98 +36,55 @@
             color: var(--text-light);
             line-height: 1.7;
             background-color: var(--bg-dark-primary);
-            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 30px 30px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
         .container { width: 90%; max-width: 1140px; margin: 0 auto; padding: 0 15px; }
 
-        /* --- Custom Scrollbar --- */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark-primary); }
-        ::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
-
         /* --- Navigation Bar --- */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 15px 0;
-            z-index: 1000;
-            transition: all var(--transition-speed);
-            transform: translateY(-100%);
-            opacity: 0;
+            position: fixed; top: 0; width: 100%; height: var(--nav-height);
+            z-index: 1000; transition: all var(--transition-speed);
         }
         nav.scrolled {
             background-color: rgba(10, 25, 47, 0.85);
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
-            transform: translateY(0);
-            opacity: 1;
         }
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .logo {
-            font-family: var(--font-code);
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 35px;
-        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+        .logo { font-family: var(--font-code); font-size: 1.5rem; color: var(--primary-color); text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 35px; }
         .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            padding-bottom: 5px;
-            transition: color var(--transition-speed);
+            color: var(--text-light); text-decoration: none; font-weight: 500;
+            position: relative; padding-bottom: 5px; transition: color var(--transition-speed);
         }
+        .nav-links a.active, .nav-links a:hover { color: var(--primary-color); }
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: 0; left: 50%; transform: translateX(-50%);
             background-color: var(--primary-color);
             transition: width var(--transition-speed);
         }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary-color);
-        }
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
+        .nav-links a.active::after, .nav-links a:hover::after { width: 100%; }
+
+        /* --- Hamburger Menu (Mobile) --- */
+        .hamburger { display: none; cursor: pointer; }
+        .hamburger div {
+            width: 25px; height: 3px; background-color: var(--text-light);
+            margin: 5px; transition: all 0.3s ease;
         }
 
         /* --- Header / Hero Section --- */
         header {
-            background-color: transparent;
-            padding: 150px 0 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            position: relative;
-            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; position: relative; overflow: hidden;
+            padding-top: var(--nav-height);
         }
-        #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-        .header-content { position: relative; z-index: 2; text-align: left; max-width: 800px; }
-        header .greeting { color: var(--primary-color); font-family: var(--font-code); margin-bottom: 20px; font-size: 1.1rem; }
+        #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .header-content { text-align: left; max-width: 800px; }
+        header .greeting { color: var(--primary-color); font-family: var(--font-code); margin-bottom: 20px; font-size: clamp(1rem, 4vw, 1.1rem); }
         header h1 { font-weight: 700; font-size: clamp(2.8rem, 7vw, 4.5rem); margin-bottom: 0.4em; color: var(--text-heading); line-height: 1.1; }
-        header h2.subtitle { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1em; font-weight: 600; color: var(--text-secondary); line-height: 1.2; }
+        header h2.subtitle { font-size: clamp(1.8rem, 5vw, 3.5rem); margin-bottom: 1em; font-weight: 600; color: var(--text-secondary); line-height: 1.2; }
         header p.description { max-width: 600px; margin-bottom: 2.5em; color: var(--text-secondary); }
         
         .cta-button {
@@ -146,209 +96,131 @@
         .cta-button:hover { background: rgba(0, 191, 255, 0.1); box-shadow: var(--shadow-glow); transform: translateY(-3px); }
 
         /* --- General Section Styling --- */
-        section { padding: 120px 0; overflow: hidden; }
+        section { padding: 100px 0; overflow: hidden; }
+        section:nth-of-type(even) { background-color: var(--bg-dark-secondary); }
         .section-title {
             text-align: center; font-weight: 700;
-            font-size: clamp(2.2rem, 5vw, 3.2rem);
-            color: var(--text-heading); margin-bottom: 20px;
-            position: relative; font-family: var(--font-body);
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--text-heading); margin-bottom: 15px; position: relative;
         }
-        .section-title::before {
-            content: attr(data-counter);
-            font-family: var(--font-code);
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            margin-right: 10px;
-        }
-        .section-title::after {
-            content: ''; display: block; width: 200px; height: 1px;
-            background: #233554;
-            margin: 0 auto;
-            position: relative; left: 100px; top: -1.5rem;
-        }
-        .section-subtitle { text-align: center; font-size: clamp(1rem, 2.8vw, 1.2rem); color: var(--text-secondary); margin-bottom: 70px; max-width: 750px; margin-left: auto; margin-right: auto; }
-        
+        .section-subtitle { text-align: center; font-size: clamp(1rem, 3vw, 1.15rem); color: var(--text-secondary); margin-bottom: 60px; max-width: 750px; margin-left: auto; margin-right: auto; }
+
         /* --- About Section --- */
-        #about .about-content { display: grid; grid-template-columns: 3fr 2fr; gap: 50px; align-items: flex-start; }
-        #about .about-text ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        #about .about-text li { position: relative; padding-left: 25px; color: var(--text-secondary); }
-        #about .about-text li::before { content: '▹'; position: absolute; left: 0; color: var(--primary-color); }
-        #about .profile-pic-container { position: relative; max-width: 300px; }
-        #about .profile-pic { width: 100%; border-radius: var(--border-radius); filter: grayscale(100%) contrast(1.2); transition: var(--transition-speed); }
-        #about .profile-pic-container:hover .profile-pic { filter: none; }
-        #about .profile-pic-container::after { content: ''; display: block; position: absolute; width: 100%; height: 100%; border: 2px solid var(--primary-color); top: 15px; left: 15px; border-radius: var(--border-radius); z-index: -1; transition: var(--transition-speed); }
-        #about .profile-pic-container:hover::after { top: 10px; left: 10px; }
+        #about .about-text { max-width: 800px; margin: 0 auto; }
+        #about .about-text p { margin-bottom: 15px; }
 
-        /* --- Services & Portfolio Sections --- */
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 25px; }
-        .card {
-            background-color: var(--card-bg);
-            padding: 40px 30px;
-            border-radius: var(--border-radius);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            border: 1px solid #1d2d50;
-            box-shadow: var(--shadow-strong);
-            display: flex; flex-direction: column;
-            opacity: 0; transform: translateY(40px); /* For animation */
-        }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px -15px rgba(2,12,27,0.8), var(--shadow-glow); }
-        .card .icon { font-size: 2.8rem; color: var(--primary-color); margin-bottom: 25px; }
-        .card h3 { font-size: 1.4rem; font-weight: 600; color: var(--text-heading); margin-bottom: 15px; }
-        .card p { font-size: 0.95rem; color: var(--text-secondary); flex-grow: 1; }
-        .card .tech-list { list-style: none; display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; font-family: var(--font-code); font-size: 0.8rem; color: var(--text-secondary); }
-
-        /* --- Process Section --- */
-        #process .process-steps {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin-top: 50px;
-        }
-        #process .process-steps::before {
-            content: '';
-            position: absolute;
-            top: 27px;
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary-color), var(--bg-dark-secondary) 90%);
-            opacity: 0.3;
-        }
-        .step { text-align: center; width: 23%; position: relative; }
-        .step .step-number {
-            display: inline-flex; align-items: center; justify-content: center;
-            background-color: var(--bg-dark-primary);
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            width: 55px; height: 55px;
-            border-radius: 50%;
-            font-weight: 700; font-size: 1.6rem;
-            margin-bottom: 20px;
-            transition: var(--transition-speed);
-        }
-        .step:hover .step-number { background-color: var(--primary-color); color: var(--bg-dark-primary); box-shadow: var(--shadow-glow); }
-        .step h4 { color: var(--text-heading); margin-bottom: 10px; }
-        .step p { font-size: 0.9rem; color: var(--text-secondary); }
-
-        /* --- Testimonials Section --- */
-        .testimonial-slider { position: relative; max-width: 800px; margin: 0 auto; }
-        .testimonial-card {
-            display: none;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: var(--border-radius);
-            text-align: center;
-        }
-        .testimonial-card.active { display: block; }
-        .testimonial-card .quote-icon { font-size: 2rem; color: var(--primary-color); opacity: 0.5; }
-        .testimonial-card p { font-size: 1.1rem; font-style: italic; margin: 20px 0; color: var(--text-secondary); }
-        .testimonial-card .author { font-weight: 600; color: var(--text-heading); }
-        .slider-controls { text-align: center; margin-top: 30px; }
-        .slider-controls button {
-            background: none; border: 2px solid var(--text-secondary);
-            color: var(--text-secondary); width: 40px; height: 40px;
-            border-radius: 50%; font-size: 1.2rem; cursor: pointer;
-            margin: 0 10px; transition: var(--transition-speed);
-        }
-        .slider-controls button:hover { border-color: var(--primary-color); color: var(--primary-color); }
-        
-        /* --- Contact Section & Python Code Block --- */
-        #contact { background-color: var(--bg-dark-secondary); }
-        .contact-wrapper {
+        /* --- Skills Section --- */
+        .skills-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: flex-start;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
-        .form-group { margin-bottom: 25px; position: relative; }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            background: var(--bg-dark-primary);
-            border: 1px solid #233554;
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid #1d2d50;
+            padding: 25px;
             border-radius: var(--border-radius);
-            padding: 15px;
-            color: var(--text-light);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: border-color var(--transition-speed);
+            transition: all var(--transition-speed);
         }
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
+        .skill-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-glow); }
+        .skill-card h3 { color: var(--primary-color); margin-bottom: 15px; border-bottom: 1px solid #233554; padding-bottom: 10px; }
+        .skill-card ul { list-style: none; padding: 0; }
+        .skill-card li { margin-bottom: 10px; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; }
+        .skill-card .fa-check-circle { color: var(--primary-color); }
+
+        /* --- Services Section --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 25px; }
+        .service-card {
+            background-color: var(--card-bg); padding: 40px 30px; border-radius: var(--border-radius);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: 1px solid #1d2d50; box-shadow: var(--shadow-strong);
+            display: flex; flex-direction: column;
         }
-        .form-group textarea { resize: vertical; min-height: 150px; }
-        .error-message { color: #ff4d4d; font-size: 0.85rem; margin-top: 5px; display: none; }
-        
-        .submit-btn-wrapper { position: relative; }
-        .submit-btn {
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px -15px rgba(2,12,27,0.8), var(--shadow-glow); }
+        .service-card .icon { font-size: 2.8rem; color: var(--primary-color); margin-bottom: 25px; }
+        .service-card h3 { font-size: 1.4rem; font-weight: 600; color: var(--text-heading); margin-bottom: 15px; }
+        .service-card p { font-size: 0.95rem; color: var(--text-secondary); flex-grow: 1; }
+
+        /* --- FAQ Section --- */
+        .faq-accordion { max-width: 800px; margin: 0 auto; }
+        .faq-item {
+            background-color: var(--card-bg);
+            border: 1px solid #1d2d50;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        .faq-question {
             width: 100%;
+            background: none; border: none;
+            padding: 20px 25px;
+            text-align: left;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-heading);
             cursor: pointer;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
         }
-        .spinner {
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 3px solid var(--primary-color);
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: none;
-            margin-right: 10px;
+        .faq-question .icon { transition: transform 0.3s ease; }
+        .faq-item.active .faq-question .icon { transform: rotate(45deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
         }
+        .faq-answer p { padding: 0 25px 20px; color: var(--text-secondary); }
+        .faq-item.active .faq-answer { max-height: 300px; /* Adjust as needed */ }
+
+        /* --- Contact Section --- */
+        #contact .form-wrapper { max-width: 700px; margin: 0 auto; }
+        .form-group { margin-bottom: 25px; }
+        .form-group input, .form-group textarea {
+            width: 100%; background: var(--bg-dark-primary); border: 1px solid #233554;
+            border-radius: var(--border-radius); padding: 15px; color: var(--text-light);
+            font-family: var(--font-body); font-size: 1rem; transition: border-color var(--transition-speed);
+        }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-color); }
+        .form-group textarea { resize: vertical; min-height: 150px; }
+        .error-message { color: #ff4d4d; font-size: 0.85rem; margin-top: 5px; display: none; }
         #form-status { margin-top: 20px; text-align: center; font-weight: 500; display: none; }
         
-        .code-explanation h3 { color: var(--text-heading); margin-bottom: 15px; }
-        .code-explanation p { color: var(--text-secondary); margin-bottom: 20px; }
-        .code-explanation p code {
-            font-family: var(--font-code);
-            background: #233554;
-            color: var(--primary-color);
-            padding: 3px 6px;
-            border-radius: 4px;
-        }
-        /* Styling for Prism.js code block */
-        pre[class*="language-"] {
-            border-radius: var(--border-radius);
-            border: 1px solid #233554;
-            box-shadow: var(--shadow-strong);
-            font-size: 0.9rem;
-        }
-
         /* --- Footer --- */
         footer {
             background-color: #081426; color: var(--text-secondary);
-            text-align: center; padding: 40px 20px;
-            font-size: 0.9rem;
+            text-align: center; padding: 40px 20px; font-size: 0.9rem;
         }
         .footer-socials { list-style: none; display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
         .footer-socials a { color: var(--text-secondary); font-size: 1.5rem; transition: var(--transition-speed); }
         .footer-socials a:hover { color: var(--primary-color); transform: translateY(-3px); }
 
-        /* --- Animations --- */
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .animated-item {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .animated-item.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 992px) {
-            #about .about-content { grid-template-columns: 1fr; }
-            #about .profile-pic-container { margin: 40px auto 0; }
-            .contact-wrapper { grid-template-columns: 1fr; }
-            #process .process-steps { flex-direction: column; gap: 40px; align-items: center; }
-            #process .step { width: 80%; }
-            #process .process-steps::before { display: none; }
-        }
-        @media (max-width: 768px) {
-            .nav-links { display: none; /* For a full implementation, a mobile hamburger menu would be added here */ }
+        /* --- Animations & Utilities --- */
+        .animated-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animated-item.is-visible { opacity: 1; transform: translateY(0); }
+        
+        /* --- Mobile Responsiveness --- */
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                right: -100%; top: 0;
+                height: 100vh; width: 75%;
+                background-color: var(--bg-dark-secondary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 50px;
+                transition: right 0.5s ease-in-out;
+                box-shadow: -10px 0px 30px -15px rgba(2,12,27,0.7);
+            }
+            .nav-links.nav-active { right: 0; }
+            .nav-links a { font-size: 1.2rem; }
+            .hamburger { display: block; z-index: 1001; }
+            .hamburger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+            .hamburger.toggle .line2 { opacity: 0; }
+            .hamburger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+            
             header { text-align: center; }
             header .header-content { text-align: left; }
         }
@@ -357,14 +229,20 @@
 <body>
 
     <nav id="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo"><Nicolas /></a>
+        <div class="container nav-container">
+            <a href="#" class="logo">&lt;Nicolas /&gt;</a>
             <ul class="nav-links">
                 <li><a href="#about" class="nav-link">Sobre</a></li>
+                <li><a href="#skills" class="nav-link">Habilidades</a></li>
                 <li><a href="#services" class="nav-link">Serviços</a></li>
-                <li><a href="#portfolio" class="nav-link">Portfólio</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
                 <li><a href="#contact" class="nav-link">Contato</a></li>
             </ul>
+            <div class="hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
         </div>
     </nav>
 
@@ -373,12 +251,12 @@
         <div class="header-content container">
             <p class="greeting animated-item">Olá, meu nome é</p>
             <h1 class="animated-item" style="transition-delay: 100ms;">Nicolas.</h1>
-            <h2 class="subtitle animated-item" style="transition-delay: 200ms;">Eu construo coisas para a web.</h2>
+            <h2 class="subtitle animated-item" style="transition-delay: 200ms;">Eu construo soluções para a web.</h2>
             <p class="description animated-item" style="transition-delay: 300ms;">
-                Sou um designer e desenvolvedor focado em criar experiências digitais marcantes. Minha especialidade é unir design limpo, código eficiente e estratégias de SEO para entregar produtos que não só parecem bons, mas também funcionam e geram resultados.
+                Sou um desenvolvedor focado em criar experiências digitais marcantes. Minha especialidade é unir design limpo, código eficiente e estratégias de SEO para entregar produtos que não só têm uma ótima aparência, mas também funcionam e geram resultados.
             </p>
             <div class="animated-item" style="transition-delay: 400ms;">
-                <a href="#contact" class="cta-button">Entre em Contato</a>
+                <a href="#contact" class="cta-button">Vamos Conversar</a>
             </div>
         </div>
     </header>
@@ -386,43 +264,69 @@
     <main>
         <section id="about">
             <div class="container">
-                <h2 class="section-title" data-counter="01.">Sobre Mim</h2>
-                <div class="about-content">
-                    <div class="about-text animated-item">
-                        <p>Desde que comecei a explorar o desenvolvimento web, sou fascinado pela capacidade de transformar uma tela em branco em uma interface interativa e útil. Essa paixão me levou a aprofundar não apenas em linguagens como HTML, CSS e JavaScript, mas também a entender a psicologia por trás de um bom design e a lógica de negócios que impulsiona um projeto.</p>
-                        <p>Atualmente, meu foco é ajudar pequenas e médias empresas a estabelecerem uma presença digital forte, através de websites performáticos e uma identidade visual coesa. Acredito que a tecnologia deve ser uma aliada, simplificando processos e abrindo portas.</p>
-                        <p>Aqui estão algumas tecnologias com as quais tenho trabalhado recentemente:</p>
+                <h2 class="section-title">Sobre Mim</h2>
+                <div class="about-text animated-item">
+                    <p>Desde que comecei a explorar o desenvolvimento web, sou fascinado pela capacidade de transformar uma tela em branco em uma interface interativa e útil. Essa paixão me levou a aprofundar não apenas em linguagens como HTML, CSS e JavaScript, mas também a entender a psicologia por trás de um bom design e a lógica de negócios que impulsiona um projeto.</p>
+                    <p>Meu objetivo é ajudar pessoas e empresas a estabelecerem uma presença digital forte, através de websites performáticos e uma identidade visual coesa. Acredito que a tecnologia deve ser uma aliada, simplificando processos e abrindo portas para novas oportunidades. Estou sempre aprendendo e me adaptando às novas tendências para oferecer o que há de mais moderno e eficaz no mercado.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" style="background-color: var(--bg-dark-secondary);">
+            <div class="container">
+                <h2 class="section-title">Habilidades & Tecnologias</h2>
+                <p class="section-subtitle">Estas são as ferramentas e tecnologias que utilizo para transformar ideias em realidade.</p>
+                <div class="skills-grid">
+                    <div class="skill-card animated-item">
+                        <h3>Front-End</h3>
                         <ul>
-                            <li>HTML5 & CSS3</li>
-                            <li>JavaScript (ES6+)</li>
-                            <li>React</li>
-                            <li>Node.js</li>
-                            <li>Python (Flask)</li>
-                            <li>Figma</li>
+                            <li><i class="fas fa-check-circle"></i> HTML5</li>
+                            <li><i class="fas fa-check-circle"></i> CSS3 (Flexbox, Grid)</li>
+                            <li><i class="fas fa-check-circle"></i> JavaScript (ES6+)</li>
+                            <li><i class="fas fa-check-circle"></i> React.js</li>
+                            <li><i class="fas fa-check-circle"></i> Design Responsivo</li>
                         </ul>
                     </div>
-                    <div class="profile-pic-container animated-item" style="transition-delay: 200ms;">
-                        <img src="https://via.placeholder.com/500x500.png/0a192f/8892b0?text=Nicolas" alt="Foto de Nicolas" class="profile-pic">
+                    <div class="skill-card animated-item" style="transition-delay: 100ms;">
+                        <h3>Back-End</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Node.js</li>
+                            <li><i class="fas fa-check-circle"></i> Express.js</li>
+                            <li><i class="fas fa-check-circle"></i> Python (Flask)</li>
+                            <li><i class="fas fa-check-circle"></i> APIs RESTful</li>
+                            <li><i class="fas fa-check-circle"></i> MongoDB / SQL</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card animated-item" style="transition-delay: 200ms;">
+                        <h3>Design & Ferramentas</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Figma</li>
+                            <li><i class="fas fa-check-circle"></i> SEO On-Page</li>
+                            <li><i class="fas fa-check-circle"></i> Git & GitHub</li>
+                            <li><i class="fas fa-check-circle"></i> Otimização de Performance</li>
+                            <li><i class="fas fa-check-circle"></i> Photoshop</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="services" style="background-color: var(--bg-dark-secondary);">
+        <section id="services">
             <div class="container">
-                <h2 class="section-title" data-counter="02.">Serviços</h2>
-                <div class="grid-layout">
-                    <div class="card animated-item">
+                <h2 class="section-title">Serviços</h2>
+                <p class="section-subtitle">Ofereço um leque de soluções digitais para atender às suas necessidades.</p>
+                <div class="services-grid">
+                    <div class="service-card animated-item">
                         <div class="icon"><i class="fas fa-palette"></i></div>
                         <h3>Design & Identidade Visual</h3>
                         <p>Criação de logotipos, paletas de cores e guias de estilo que formam uma identidade visual única e memorável para sua marca.</p>
                     </div>
-                    <div class="card animated-item" style="transition-delay: 100ms;">
+                    <div class="service-card animated-item" style="transition-delay: 100ms;">
                         <div class="icon"><i class="fas fa-code"></i></div>
                         <h3>Desenvolvimento Web</h3>
                         <p>Construção de sites institucionais, landing pages e aplicações web customizadas, sempre com foco em performance e responsividade.</p>
                     </div>
-                    <div class="card animated-item" style="transition-delay: 200ms;">
+                    <div class="service-card animated-item" style="transition-delay: 200ms;">
                         <div class="icon"><i class="fas fa-chart-line"></i></div>
                         <h3>Otimização SEO</h3>
                         <p>Análise e implementação de técnicas de SEO on-page para melhorar o ranking do seu site nos buscadores e atrair tráfego orgânico qualificado.</p>
@@ -431,153 +335,61 @@
             </div>
         </section>
 
-        <section id="portfolio">
-             <div class="container">
-                <h2 class="section-title" data-counter="03.">Portfólio</h2>
-                <p class="section-subtitle">Alguns projetos que tive o prazer de desenvolver.</p>
-                <div class="grid-layout">
-                    <!-- Adicione seus projetos aqui -->
-                    <div class="card animated-item">
-                        <h3>Projeto E-commerce "TechStore"</h3>
-                        <p>Uma interface moderna para uma loja de eletrônicos, focada na experiência do usuário e conversão.</p>
-                        <ul class="tech-list">
-                            <li>React</li>
-                            <li>Styled-Components</li>
-                            <li>API Rest</li>
-                        </ul>
+        <section id="faq" style="background-color: var(--bg-dark-secondary);">
+            <div class="container">
+                <h2 class="section-title">Perguntas Frequentes</h2>
+                <p class="section-subtitle">Tire suas dúvidas mais comuns sobre meu processo de trabalho.</p>
+                <div class="faq-accordion">
+                    <div class="faq-item animated-item">
+                        <button class="faq-question">
+                            <span>Qual o prazo médio para a entrega de um site?</span>
+                            <i class="fas fa-plus icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>O prazo varia de acordo com a complexidade do projeto. Uma landing page simples pode levar de 1 a 2 semanas, enquanto um site institucional completo pode levar de 3 a 6 semanas. Após nossa conversa inicial, fornecerei um cronograma detalhado.</p>
+                        </div>
                     </div>
-                     <div class="card animated-item" style="transition-delay: 100ms;">
-                        <h3>Landing Page "HealthApp"</h3>
-                        <p>Página de captura para um aplicativo de saúde, com design limpo e chamadas para ação claras.</p>
-                        <ul class="tech-list">
-                            <li>HTML5</li>
-                            <li>CSS3 (Flexbox/Grid)</li>
-                            <li>JavaScript</li>
-                        </ul>
+                    <div class="faq-item animated-item">
+                        <button class="faq-question">
+                            <span>Você oferece suporte após a entrega do projeto?</span>
+                            <i class="fas fa-plus icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sim! Ofereço um período de 30 dias de suporte gratuito para corrigir qualquer problema técnico que possa surgir. Também ofereço pacotes de manutenção mensal para atualizações de conteúdo, segurança e performance, caso você precise.</p>
+                        </div>
                     </div>
-                     <div class="card animated-item" style="transition-delay: 200ms;">
-                        <h3>Site Institucional "Advocacia XYZ"</h3>
-                        <p>Website corporativo para um escritório de advocacia, transmitindo seriedade e profissionalismo.</p>
-                        <ul class="tech-list">
-                            <li>Wordpress</li>
-                            <li>PHP</li>
-                            <li>SEO On-Page</li>
-                        </ul>
+                    <div class="faq-item animated-item">
+                        <button class="faq-question">
+                            <span>Como funciona o processo de pagamento?</span>
+                            <i class="fas fa-plus icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Normalmente, trabalho com um modelo de 50% de adiantamento para iniciar o projeto e 50% na entrega final, após sua aprovação. Sou flexível e podemos discutir outras formas de pagamento que se adaptem à sua necessidade.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="process" style="background-color: var(--bg-dark-secondary);">
+        <section id="contact">
             <div class="container">
-                <h2 class="section-title" data-counter="04.">Meu Processo</h2>
-                <div class="process-steps">
-                    <div class="step animated-item">
-                        <div class="step-number">1</div>
-                        <h4>Imersão</h4>
-                        <p>Entendimento profundo dos seus objetivos, público e desafios.</p>
-                    </div>
-                    <div class="step animated-item" style="transition-delay: 100ms;">
-                        <div class="step-number">2</div>
-                        <h4>Estratégia & Design</h4>
-                        <p>Criação de wireframes, protótipos e o design visual da solução.</p>
-                    </div>
-                    <div class="step animated-item" style="transition-delay: 200ms;">
-                        <div class="step-number">3</div>
-                        <h4>Desenvolvimento</h4>
-                        <p>Codificação do projeto com as melhores práticas e tecnologias.</p>
-                    </div>
-                    <div class="step animated-item" style="transition-delay: 300ms;">
-                        <div class="step-number">4</div>
-                        <h4>Lançamento & Suporte</h4>
-                        <p>Entrega, testes finais e suporte para garantir o sucesso contínuo.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="testimonials">
-            <div class="container">
-                <h2 class="section-title" data-counter="05.">Depoimentos</h2>
-                <div class="testimonial-slider animated-item">
-                    <div class="testimonial-card active">
-                        <i class="fas fa-quote-left quote-icon"></i>
-                        <p>O Nicolas transformou nossa visão em realidade. O site ficou incrível e nossos clientes elogiam constantemente. Profissionalismo e talento puro!</p>
-                        <span class="author">- João Silva, CEO da TechStore</span>
-                    </div>
-                    <div class="testimonial-card">
-                        <i class="fas fa-quote-left quote-icon"></i>
-                        <p>Trabalhar com o Nicolas foi um divisor de águas. Ele não apenas entregou o que foi pedido, mas também sugeriu melhorias que fizeram toda a diferença.</p>
-                        <span class="author">- Maria Oliveira, Marketing na HealthApp</span>
-                    </div>
-                    <div class="testimonial-card">
-                        <i class="fas fa-quote-left quote-icon"></i>
-                        <p>Rápido, eficiente e com uma comunicação excelente. O resultado final superou todas as nossas expectativas. Recomendo fortemente!</p>
-                        <span class="author">- Carlos Pereira, Sócio da Advocacia XYZ</span>
-                    </div>
-                    <div class="slider-controls">
-                        <button id="prev-btn"><i class="fas fa-chevron-left"></i></button>
-                        <button id="next-btn"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" style="background-color: var(--bg-dark-secondary);">
-            <div class="container">
-                <h2 class="section-title" data-counter="06.">Entre em Contato</h2>
-                <p class="section-subtitle">Tenho interesse em oportunidades de freelancer e projetos ambiciosos. Se você tem uma ideia e precisa de ajuda para tirá-la do papel, vamos conversar.</p>
-                <div class="contact-wrapper">
-                    <div class="contact-form animated-item">
-                        <form id="main-contact-form" novalidate>
-                            <div class="form-group">
-                                <input type="text" id="name" name="name" required placeholder="Seu Nome">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" id="email" name="email" required placeholder="Seu E-mail">
-                                <p class="error-message" id="email-error">Por favor, insira um e-mail válido.</p>
-                            </div>
-                            <div class="form-group">
-                                <textarea id="message" name="message" required placeholder="Sua Mensagem"></textarea>
-                                <p class="error-message" id="message-error">A mensagem não pode estar vazia.</p>
-                            </div>
-                            <div class="submit-btn-wrapper">
-                                <button type="submit" class="cta-button submit-btn">
-                                    <span class="spinner"></span>
-                                    <span class="btn-text">Enviar Mensagem</span>
-                                </button>
-                            </div>
-                            <p id="form-status"></p>
-                        </form>
-                    </div>
-                    <div class="code-explanation animated-item" style="transition-delay: 200ms;">
-                        <h3>Como a Mágica Acontece:</h3>
-                        <p>O formulário ao lado é feito com <strong>HTML</strong> e <strong>JavaScript</strong>. Quando você clica em enviar, o JavaScript valida os dados e (em um projeto real) os envia para um "backend".</p>
-                        <p>Abaixo está um exemplo de como um backend em <strong>Python</strong>, usando o framework <code>Flask</code>, receberia sua mensagem:</p>
-                        <pre><code class="language-python"># backend.py - Um exemplo simples com Flask (Python)
-
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
-
-@app.route('/submit_form', methods=['POST'])
-def handle_form():
-    data = request.get_json()
-    
-    name = data.get('name')
-    email = data.get('email')
-    message = data.get('message')
-
-    # Aqui, o código enviaria um e-mail, salvaria no banco de dados, etc.
-    print(f"Nova mensagem de {name} ({email}): {message}")
-
-    # Retorna uma resposta de sucesso para o frontend
-    return jsonify({'status': 'success', 'message': 'Mensagem recebida!'})
-
-if __name__ == '__main__':
-    app.run(debug=True)
-</code></pre>
-                    </div>
+                <h2 class="section-title">Vamos Construir Algo Incrível?</h2>
+                <p class="section-subtitle">Estou pronto para ouvir sobre seu projeto. Se você tem uma ideia e precisa de ajuda para tirá-la do papel, me envie uma mensagem!</p>
+                <div class="form-wrapper animated-item">
+                    <form id="main-contact-form" novalidate>
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required placeholder="Seu Nome">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required placeholder="Seu E-mail">
+                            <p class="error-message" id="email-error">Por favor, insira um e-mail válido.</p>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" required placeholder="Sua Mensagem"></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">Enviar Mensagem</button>
+                        <p id="form-status"></p>
+                    </form>
                 </div>
             </div>
         </section>
@@ -586,23 +398,23 @@ if __name__ == '__main__':
     <footer>
         <div class="container">
             <ul class="footer-socials">
-                <li><a href="https://github.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a></li>
-                <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a></li>
-                <li><a href="mailto:Nicolasfreelancercriativoo@gmail.com"><i class="fas fa-envelope"></i></a></li>
+                <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
+                <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a href="mailto:Nicolasfreelancercriativoo@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a></li>
             </ul>
-            <p>Criado por Nicolas.</p>
-            <p>Design inspirado em conceitos modernos e construído com muito <i class="fas fa-mug-hot"></i>.</p>
+            <p>Desenvolvido com <i class="fas fa-heart" style="color:var(--primary-color)"></i> por Nicolas.</p>
+            <p>&copy; <span id="current-year"></span> Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <!-- Prism.js for Python Syntax Highlighting -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-
-        // --- Animações de Entrada com Intersection Observer ---
+        const nav = document.getElementById('navbar');
+        const navLinks = document.querySelector('.nav-links');
+        const hamburger = document.querySelector('.hamburger');
+        const links = document.querySelectorAll('.nav-links li');
+        
+        // --- Animações de Entrada ---
         const animatedItems = document.querySelectorAll('.animated-item');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -614,122 +426,75 @@ if __name__ == '__main__':
         }, { threshold: 0.1 });
         animatedItems.forEach(item => observer.observe(item));
 
-        // --- Sticky Navbar ---
-        const navbar = document.getElementById('navbar');
+        // --- Navbar Scrolled Effect ---
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
+                nav.classList.add('scrolled');
             } else {
-                navbar.classList.remove('scrolled');
+                nav.classList.remove('scrolled');
             }
         });
-
-        // --- Active Link on Scroll ---
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-links a');
         
-        function changeLinkState() {
-            let index = sections.length;
-            while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
-            
-            navLinks.forEach((link) => link.classList.remove('active'));
-            // Check if navLinks[index] exists before adding class
-            if(navLinks[index]) {
-                navLinks[index].classList.add('active');
-            }
-        }
-        changeLinkState();
-        window.addEventListener('scroll', changeLinkState);
+        // --- Hamburger Menu Toggle ---
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+            hamburger.classList.toggle('toggle');
+        });
 
+        // --- Close Menu on Link Click ---
+        navLinks.addEventListener('click', () => {
+             if (navLinks.classList.contains('nav-active')){
+                navLinks.classList.remove('nav-active');
+                hamburger.classList.remove('toggle');
+             }
+        });
 
-        // --- Testimonial Slider ---
-        const testimonials = document.querySelectorAll('.testimonial-card');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        let currentTestimonial = 0;
-
-        function showTestimonial(index) {
-            testimonials.forEach(t => t.classList.remove('active'));
-            testimonials[index].classList.add('active');
-        }
-
-        if(prevBtn && nextBtn) {
-            prevBtn.addEventListener('click', () => {
-                currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
-                showTestimonial(currentTestimonial);
+        // --- FAQ Accordion ---
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) {
+                    item.classList.add('active');
+                }
             });
-            nextBtn.addEventListener('click', () => {
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-                showTestimonial(currentTestimonial);
-            });
-        }
+        });
         
-        // --- Contact Form Logic ---
+        // --- Contact Form Logic (Simulation) ---
         const form = document.getElementById('main-contact-form');
-        const emailInput = document.getElementById('email');
-        const messageInput = document.getElementById('message');
-        const emailError = document.getElementById('email-error');
-        const messageError = document.getElementById('message-error');
         const formStatus = document.getElementById('form-status');
-        const submitBtn = form.querySelector('.submit-btn');
-        const spinner = form.querySelector('.spinner');
-        const btnText = form.querySelector('.btn-text');
-
-        function validateEmail(email) {
-            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-        }
-
-        if(form) {
+        if (form) {
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                let isValid = true;
+                // Basic validation
+                const emailInput = document.getElementById('email');
+                if (!emailInput.value || !emailInput.value.includes('@')) {
+                    formStatus.textContent = "Por favor, insira um e-mail válido.";
+                    formStatus.style.color = "#ff4d4d";
+                    formStatus.style.display = 'block';
+                    return;
+                }
                 
-                // Validate email
-                if (!validateEmail(emailInput.value)) {
-                    emailError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    emailError.style.display = 'none';
-                }
+                formStatus.textContent = "Enviando...";
+                formStatus.style.color = "var(--primary-color)";
+                formStatus.style.display = 'block';
 
-                // Validate message
-                if (messageInput.value.trim() === '') {
-                    messageError.style.display = 'block';
-                    isValid = false;
-                } else {
-                    messageError.style.display = 'none';
-                }
-
-                if (isValid) {
-                    // Simulate form submission
-                    submitBtn.disabled = true;
-                    spinner.style.display = 'inline-block';
-                    btnText.textContent = 'Enviando...';
-
-                    setTimeout(() => {
-                        spinner.style.display = 'none';
-                        btnText.textContent = 'Enviar Mensagem';
-                        submitBtn.disabled = false;
-                        
-                        formStatus.textContent = "Mensagem enviada com sucesso! Obrigado pelo contato.";
-                        formStatus.style.color = "var(--primary-color)";
-                        formStatus.style.display = 'block';
-                        form.reset();
-
-                        setTimeout(() => { formStatus.style.display = 'none'; }, 5000);
-                    }, 2000); // Simulate 2 seconds of loading
-                }
+                setTimeout(() => {
+                    formStatus.textContent = "Mensagem enviada com sucesso! Obrigado.";
+                    form.reset();
+                    setTimeout(() => { formStatus.style.display = 'none'; }, 4000);
+                }, 1500);
             });
         }
         
-        // --- PARTICLE.JS - Re-implementado para não depender de biblioteca externa ---
-        // (código das partículas omitido para brevidade, é o mesmo da resposta anterior)
+        // --- Particle Animation (Optimized for Mobile) ---
         const canvas = document.getElementById('particle-canvas');
         if (canvas) {
             const ctx = canvas.getContext('2d');
             let particles = [];
-            const particleCount = 70;
+            const particleCount = window.innerWidth < 768 ? 25 : 70; // Less particles on mobile
             
             function setCanvasSize() {
                 canvas.width = window.innerWidth;
@@ -742,31 +507,27 @@ if __name__ == '__main__':
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
                     this.size = Math.random() * 2 + 1;
-                    this.speedX = Math.random() * 0.5 - 0.25;
-                    this.speedY = Math.random() * 0.5 - 0.25;
+                    this.speedX = (Math.random() * 0.5 - 0.25) * 0.5; // Slower speed
+                    this.speedY = (Math.random() * 0.5 - 0.25) * 0.5; // Slower speed
                 }
                 update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-
-                    if (this.size > 0.2) this.size -= 0.01;
+                    this.x += this.speedX; this.y += this.speedY;
                     if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
                     if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
                 }
                 draw() {
-                    ctx.fillStyle = 'rgba(0, 191, 255, 0.3)';
+                    ctx.fillStyle = 'rgba(0, 191, 255, 0.2)';
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
                 }
             }
             function initParticles() {
+                particles = [];
                 for (let i = 0; i < particleCount; i++) {
                     particles.push(new Particle());
                 }
             }
-            initParticles();
-
             function animateParticles() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for (let i = 0; i < particles.length; i++) {
@@ -775,14 +536,17 @@ if __name__ == '__main__':
                 }
                 requestAnimationFrame(animateParticles);
             }
+            
+            initParticles();
             animateParticles();
             window.addEventListener('resize', () => {
                 setCanvasSize();
-                particles = [];
                 initParticles();
             });
         }
-
+        
+        // --- Current Year for Footer ---
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     });
     </script>
 </body>
